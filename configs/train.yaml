@@ -1,0 +1,36 @@
+# Training hyperparameters for 04_train.py.
+#
+# LOCKED by the competition (cannot be set here; the script refuses them):
+#   model = official yolo11n.pt (sha256-pinned), imgsz = 640, pretrained = True
+# Bounds mirrored from the official 3LC plugin:
+#   epochs 1-300, batch 1-128, lr0 0.0001-0.1, lrf 0.01-1.0, patience 0-100
+#
+# Any key here is passed straight to ultralytics model.train(); CLI flags
+# (--epochs, --batch, --set key=value) override this file.
+
+epochs: 60
+batch: 32            # total across GPUs (T4 x2 -> 16 per GPU). Lower to 16 on a single 16 GB GPU if OOM.
+patience: 30
+optimizer: auto
+lr0: 0.01
+lrf: 0.01
+cos_lr: true
+warmup_epochs: 3
+workers: 4
+seed: 0
+deterministic: false # faster cudnn kernels
+amp: true            # mixed precision on CUDA
+cache: false         # 'ram' speeds up epochs if you have ~8 GB free RAM
+plots: true
+
+# Augmentation tuned for low-light images
+hsv_h: 0.015
+hsv_s: 0.6
+hsv_v: 0.6           # stronger brightness jitter: twilight <-> near-dark
+degrees: 0.0
+translate: 0.1
+scale: 0.5
+fliplr: 0.5
+mosaic: 1.0
+close_mosaic: 10     # last 10 epochs without mosaic
+mixup: 0.1

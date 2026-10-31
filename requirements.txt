@@ -1,0 +1,8 @@
+# PyTorch with CUDA is preinstalled on Kaggle GPU notebooks - don't reinstall it there.
+# Locally: install a CUDA build of torch first (https://pytorch.org/get-started/locally/), then:
+ultralytics>=8.3.0,<8.5
+opencv-python-headless>=4.8
+pandas>=2.0
+pyyaml>=6.0
+matplotlib>=3.7
+kaggle>=1.6
